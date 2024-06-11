@@ -21,6 +21,12 @@ export const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
 
+        // Verifica si se proporciona una nueva contraseña en la solicitud
+        if (req.body.password) {
+            // Encripta la nueva contraseña
+            req.body.password = await User.encryptPassword(req.body.password);
+        }
+
         const updateUser = await User.findByIdAndUpdate(id, req.body, {
             new: true,
         });
