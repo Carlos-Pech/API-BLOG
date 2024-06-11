@@ -3,6 +3,7 @@ import Comment from "../models/comments.js";
 import Blog from "../models/blog.model.js";
 import User from "../models/User.js";
 import { format } from "date-fns";
+
 export const addComment = async (req, res) => {
     try {
         const { comment, postId, idUser } = req.body;
@@ -16,7 +17,9 @@ export const addComment = async (req, res) => {
         // Obtén el nombre de usuario
         const user = await User.findById(idUser);
         if (!user) {
-            return res.status(404).json({ message: "User not found" });
+            console.log("User not found", user);
+
+            return res.status(404).json({ message: "User not found",});
         }
 
         const newComment = new Comment({ comment, postId, idUser});

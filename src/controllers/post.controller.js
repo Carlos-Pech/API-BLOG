@@ -61,7 +61,7 @@ export const postBlog = async (req, res) => {
         const productSave = await newBlog.save();
         return res
             .status(201)
-            .json({ message: "Created Product", productSave });
+            .json({ message: "Created Post", productSave });
     } catch (error) {
         console.error(error.message);
         return res.status(500).json({ message: "something went wrong", error: error.message });
