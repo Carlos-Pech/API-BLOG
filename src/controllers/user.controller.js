@@ -3,8 +3,11 @@ import User from "../models/User.js";
 
 export const userPosts = async (req, res) => {
     try {
-        const { id } = req.params;
-        const userPosts = await Blog.find({ idUser: id }).select('title content front_image back_image');
+        const { id_user } = req.params;
+        const userPosts = await Blog.find({ idUser: id_user }).select('title content front_image back_image');
+        if (userPosts.length === 0) {
+            return res.status(404).json({ message: "No posts found for this user" });
+        }
         return res.status(200).json(userPosts);
     }
     catch (error) {

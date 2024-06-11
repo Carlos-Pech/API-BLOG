@@ -4,6 +4,12 @@ import mongoosePaginate from "mongoose-paginate-v2";
 
 export const blogSchema = new Schema(
     {
+
+        idUser: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true
+        },
         title:{
             type: String,
             required: true

@@ -7,10 +7,12 @@ import { uploadImage, deleteImage } from "../utils/cloudinary.js";
 
 export const postBlog = async (req, res) => {
     try {
-        const { title, content } = req.body;
+        const { title, content, idUser } = req.body;
 
         const newBlog = new Blog({
+
             // newBlog
+            idUser,
             title,
             content,
         });

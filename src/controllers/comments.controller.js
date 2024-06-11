@@ -47,6 +47,9 @@ export const getComments = async (req, res) => {
                 date: format(new Date(comment.createdAt), 'MM/dd/yyyy, h:mm:ss a')
             };
         });
+        if (comments.length === 0) {
+            return res.status(404).json({ message: "No comments found for this post" });
+        }
 
         return res.status(200).json(formattedComments);
     } catch (error) {
