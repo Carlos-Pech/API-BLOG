@@ -19,38 +19,22 @@ export const postBlog = async (req, res) => {
 
         // Verificar si req.files está definido
         if (req.files) {
-            const { front_image, back_image } = req.files;
+            const { imagePost } = req.files;
 
-            if (front_image) {
+            if (imagePost) {
                 const resultfrontImage = await uploadImage(
-                    front_image.tempFilePath
+                    imagePost.tempFilePath
                 );
 
-                newBlog.front_image = {
+                newBlog.imagePost = {
                     publicId: resultfrontImage.public_id,
                     secureUrl: resultfrontImage.secure_url,
                 };
 
                 // Asegúrate de manejar el error en fs.unlink
-                fs.unlink(front_image.tempFilePath, (err) => {
+                fs.unlink(imagePost.tempFilePath, (err) => {
                     if (err) {
                         console.error(`Error deleting front image temp file: ${err.message}`);
-                    }
-                });
-            }
-
-            if (back_image) {
-                const resultbackImage = await uploadImage(back_image.tempFilePath);
-
-                newBlog.back_image = {
-                    publicId: resultbackImage.public_id,
-                    secureUrl: resultbackImage.secure_url,
-                };
-
-                // Asegúrate de manejar el error en fs.unlink
-                fs.unlink(back_image.tempFilePath, (err) => {
-                    if (err) {
-                        console.error(`Error deleting back image temp file: ${err.message}`);
                     }
                 });
             }
@@ -93,8 +77,8 @@ export const deletePost = async (req, res) => {
             return res.status(404).json({ message: "Post not found" });
         }
 
-        if (blog.front_image && blog.front_image.publicId) {
-            await deleteImage(blog.front_image.publicId);
+        if (blog.imagePost && blog.imagePost.publicId) {
+            await deleteImage(blog.imagePost.publicId);
         }
 
         if (blog.back_image && blog.back_image.publicId) {
@@ -125,23 +109,23 @@ export const updatePost = async (req, res) => {
             return res.status(404).json({ message: "Product not found" });
         }
 
-        if (req.files?.front_image) {
+        if (req.files?.imagePost) {
             const resultFrontImage = await uploadImage(
-                req.files.front_image.tempFilePath
+                req.files.imagePost.tempFilePath
             );
-            updateFields.front_image = {
+            updateFields.imagePost = {
                 publicId: resultFrontImage.public_id,
                 secureUrl: resultFrontImage.secure_url,
             };
 
             if (
-                updatedPostUser.front_image &&
-                updatedPostUser.front_image.publicId
+                updatedPostUser.imagePost &&
+                updatedPostUser.imagePost.publicId
             ) {
-                await deleteImage(updatedPostUser.front_image.publicId);
+                await deleteImage(updatedPostUser.imagePost.publicId);
             }
 
-            fs.unlink(req.files.front_image.tempFilePath);
+            fs.unlink(req.files.imagePost.tempFilePath);
         }
 
         if (req.files?.back_image) {

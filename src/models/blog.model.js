@@ -18,15 +18,7 @@ export const blogSchema = new Schema(
             type: String
         },
         comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }]  ,
-        front_image: {
-            publicId: {
-                type: String,
-            },
-            secureUrl: {
-                type: String,
-            },
-        },
-        back_image: {
+        imagePost: {
             publicId: {
                 type: String,
             },
