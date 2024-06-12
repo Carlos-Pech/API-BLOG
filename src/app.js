@@ -1,8 +1,6 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-// import { initializeApp } from "./libs/initalSetup.js";
-
 
 // blog
 import login from "./routes/login.routes.js"

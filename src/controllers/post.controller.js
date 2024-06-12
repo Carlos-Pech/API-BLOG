@@ -12,7 +12,7 @@ export const postBlog = async (req, res) => {
         const newBlog = new Blog({
 
             // newBlog
-            idUser,
+            idUser:idUser,
             title,
             content,
         });
@@ -31,7 +31,6 @@ export const postBlog = async (req, res) => {
                     secureUrl: resultfrontImage.secure_url,
                 };
 
-                // Asegúrate de manejar el error en fs.unlink
                 fs.unlink(imagePost.tempFilePath, (err) => {
                     if (err) {
                         console.error(`Error deleting front image temp file: ${err.message}`);

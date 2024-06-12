@@ -1,5 +1,4 @@
 import { jwtSecretKey } from "../config.js";
-import Roles from "../models/Roles.js";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import { token } from "../middleware/token.js";
