@@ -6,7 +6,7 @@ import * as controllerP from "../controllers/post.controller.js";
 const router = Router();
 
 router.post(
-    "/post/blog",
+    "/add/post",
     fileUpload({
         useTempFiles: true,
         tempFileDir: "./uploads",
