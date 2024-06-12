@@ -13,7 +13,6 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
-// initializeApp();
 
 app.use(login);
 app.use(blog);
