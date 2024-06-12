@@ -24,7 +24,7 @@ router.put(
     controllerP.updatePost
 );
 
-router.get("/getAll/post", verify.verifyToken, controllerP.getAllPost);
+router.get("/getAll/post",  controllerP.getAllPost);
 
 router.delete("/delete/post/:id", verify.verifyToken,controllerP.deletePost);
 

@@ -60,13 +60,27 @@ export const getAllPost = async (req, res) => {
                 limit,
                 page,
                 sort: { createdAt: -1 },
+                populate: {
+                    path: 'idUser',
+                    select: 'name' 
+                }
             }
         );
-        return res.status(200).json(response);
+
+        // Formatear la respuesta para incluir el nombre del usuario
+        const formattedResponse = {
+            ...response,
+            docs: response.docs.map(post => ({
+                ...post._doc,
+                userName: post.idUser.name // Añadimos el nombre del usuario a la respuesta
+            }))
+        };
+
+        return res.status(200).json(formattedResponse);
     } catch (error) {
-        return res.status(500).json({ message: "something went wrong" ,error: error.message});
+        return res.status(500).json({ message: "something went wrong", error: error.message });
     }
-}; 
+};
 export const deletePost = async (req, res) => {
     try {
         const { id } = req.params;
