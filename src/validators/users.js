@@ -40,7 +40,7 @@ export const validateCreateUser = [
         .notEmpty()
         .withMessage("No puede estar vacío")
         .isLength({ min: 1, max: 20 })
-        .withMessage("Debe tener entre 1 y 20 caraceteres"),
+        .withMessage("Debe tener entre 1 y 50 caraceteres"),
     check("password")
         .exists()
         .isString()
